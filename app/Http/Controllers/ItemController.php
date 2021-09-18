@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ItemRequest;
 use App\Models\Item;
 
 class ItemController extends Controller
@@ -23,7 +23,7 @@ class ItemController extends Controller
     {
         return view('items.create');
     }
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
         $item = new Item;
 
@@ -45,7 +45,7 @@ class ItemController extends Controller
         return view('items.edit', ['item' => $item]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ItemRequest $request, $id)
     {
         // ここはidで探して持ってくる以外はstoreと同じ
         $item = Item::find($id);
@@ -62,10 +62,11 @@ class ItemController extends Controller
         return redirect('/items');
     }
 
-     public function destroy($id)
-     {
+    public function destroy($id)
+    {
         $item = Item::find($id);
         $item->delete();
 
-        return redirect('/items');     }
+        return redirect('/items');
+    }
 }
