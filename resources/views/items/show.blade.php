@@ -30,8 +30,20 @@
     </p>
 
     <p>
-        <img src="{{ $item->image_url }}"alt="">
+        <img src="{{ $item->image_url }}" alt="">
     </p>
+
+    <div class="button-group">
+
+        <!-- 商品のidを元に編集ページへ遷移する -->
+        <button onclick="location.href='/items/{{ $item->id }}/edit'">編集する</button>
+        <form action="/items/{{ $item->id }}" method="post">
+            @csrf
+            @method('DELETE')
+            <input type="submit" value="削除する" onclick="if(!confirm('本当に削除しますか？')){return false};">
+        </form>
+
+    </div>
 </body>
 
 </html>
